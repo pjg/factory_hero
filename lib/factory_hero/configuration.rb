@@ -3,18 +3,18 @@ class Configuration
   attr_reader :factories
 
   def initialize
-    @factories = []
+    @factories = {}
   end
 
   def register_factory factory
     raise_if_exists factory.symbol
 
-    factories << factory
+    factories[factory.symbol] = factory
   end
 
   def load_factory symbol
-    factories.detect ifnone = -> { undefined_factory_exception symbol } do |factory|
-      factory.symbol == symbol
+    factories.fetch(symbol) do |symbol|
+      undefined_factory_exception symbol
     end
   end
 
@@ -25,7 +25,7 @@ class Configuration
   private
 
   def raise_if_exists symbol
-    return unless factories.detect { |factory| factory.symbol == symbol }
+    return unless factories.has_key? symbol
 
     factory_already_defined_exception symbol
   end
