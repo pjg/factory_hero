@@ -1,4 +1,5 @@
 require 'factory_hero/configuration'
+require 'factory_hero/exceptions'
 require 'factory_hero/factory'
 require "factory_hero/version"
 

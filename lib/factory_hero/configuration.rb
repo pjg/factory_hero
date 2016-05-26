@@ -13,7 +13,7 @@ class Configuration
   end
 
   def load_factory symbol
-    factories.detect ifnone = -> { raise 'Undefined factory' } do |factory|
+    factories.detect ifnone = -> { raise_exception symbol } do |factory|
       factory.symbol == symbol
     end
   end
@@ -26,6 +26,10 @@ class Configuration
 
   def delete_existing symbol
     factories.delete_if { |factory| factory.symbol == symbol }
+  end
+
+  def raise_exception symbol
+    raise UndefinedFactory.new(symbol), 'No factory definition with this name'
   end
 
 end

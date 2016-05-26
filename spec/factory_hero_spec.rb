@@ -63,7 +63,9 @@ describe FactoryHero do
 
     FactoryHero.clear!
 
-    expect { FactoryHero.build factory_class }.to raise_exception
+    expect {
+      FactoryHero.build factory_class
+    }.to raise_exception UndefinedFactory
   end
 
 end

@@ -1,0 +1,2 @@
+class UndefinedFactory < ArgumentError
+end

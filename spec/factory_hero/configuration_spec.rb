@@ -26,7 +26,7 @@ describe Configuration do
     it 'raises if factory does not exist' do
       expect {
         configuration.load_factory :non_existing
-      }.to raise_error(RuntimeError)
+      }.to raise_exception UndefinedFactory
     end
 
     it 'returns existing factory if found' do
