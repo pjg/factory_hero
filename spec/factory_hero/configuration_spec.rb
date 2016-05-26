@@ -13,12 +13,15 @@ describe Configuration do
       expect(configuration.factories).to include factory
     end
 
-    it 'allows re-registering a factory' do
+    it 'does not allow re-registering the same factory' do
       configuration.register_factory factory
-      configuration.register_factory new_factory
 
-      expect(configuration.factories).not_to include factory
-      expect(configuration.factories).to include new_factory
+      expect {
+        configuration.register_factory new_factory
+      }.to raise_exception FactoryAlreadyDefined
+
+      expect(configuration.factories).to include factory
+      expect(configuration.factories).not_to include new_factory
     end
   end
 
@@ -47,4 +50,5 @@ describe Configuration do
       expect(configuration.factories).to be_empty
     end
   end
+
 end

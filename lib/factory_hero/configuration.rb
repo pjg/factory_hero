@@ -7,13 +7,13 @@ class Configuration
   end
 
   def register_factory factory
-    delete_existing factory.symbol
+    raise_if_exists factory.symbol
 
     factories << factory
   end
 
   def load_factory symbol
-    factories.detect ifnone = -> { raise_exception symbol } do |factory|
+    factories.detect ifnone = -> { undefined_factory_exception symbol } do |factory|
       factory.symbol == symbol
     end
   end
@@ -24,12 +24,18 @@ class Configuration
 
   private
 
-  def delete_existing symbol
-    factories.delete_if { |factory| factory.symbol == symbol }
+  def raise_if_exists symbol
+    return unless factories.detect { |factory| factory.symbol == symbol }
+
+    factory_already_defined_exception symbol
   end
 
-  def raise_exception symbol
+  def undefined_factory_exception symbol
     raise UndefinedFactory.new(symbol), 'No factory definition with this name'
+  end
+
+  def factory_already_defined_exception symbol
+    raise FactoryAlreadyDefined.new(symbol), 'There is already a factory defined with this name'
   end
 
 end
