@@ -1,10 +1,11 @@
 /.bundle/
+/.ruby-version
 /.yardoc
 /Gemfile.lock
+/Guardfile
 /_yardoc/
 /coverage/
 /doc/
 /pkg/
 /spec/reports/
 /tmp/
-/Guardfile
