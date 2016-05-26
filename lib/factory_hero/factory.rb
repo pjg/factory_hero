@@ -13,10 +13,10 @@ class Factory
     instance_eval(&block) if block_given?
   end
 
-  def build attrs = {}
+  def build attributes = {}
     build_object.tap do |obj|
-      assign_default_attributes
-      assign_custom_attributes attrs
+      assign_attributes default_attributes
+      assign_attributes attributes
     end
   end
 
@@ -45,14 +45,8 @@ class Factory
     @klass = Object::const_get symbol.to_s.capitalize
   end
 
-  def assign_default_attributes
-    default_attributes.each do |attribute, value|
-      object.public_send "#{ attribute }=", value
-    end
-  end
-
-  def assign_custom_attributes attrs
-    attrs.each do |attribute, value|
+  def assign_attributes attributes
+    attributes.each do |attribute, value|
       object.public_send "#{ attribute }=", value
     end
   end
