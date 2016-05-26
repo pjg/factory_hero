@@ -22,4 +22,3 @@ module FactoryHero
   end
 
 end
-

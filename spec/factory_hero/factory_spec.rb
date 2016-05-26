@@ -1,18 +1,18 @@
 require 'spec_helper'
 
 describe Factory do
-  let(:klass) { User }
-  let(:symbol) { :user }
+  let(:factory_class) { User }
+  let(:factory_symbol) { :user }
   let(:name) { 'foobar' }
 
   it 'allows defining a factory without default attributes' do
-    factory = Factory.new symbol
+    factory = Factory.new factory_symbol
 
     expect(factory.default_attributes).to eql({})
   end
 
   it 'allows defining a factory with default attributes' do
-    factory = Factory.new symbol do
+    factory = Factory.new factory_symbol do
       name 'foobar'
     end
 
@@ -20,7 +20,7 @@ describe Factory do
   end
 
   it 'allows building new objects with default attributes' do
-    factory = Factory.new symbol do
+    factory = Factory.new factory_symbol do
       name 'foobar'
     end
 
@@ -31,7 +31,7 @@ describe Factory do
 
   it 'allows building new objects with custom attributes' do
     name = 'baz'
-    factory = Factory.new symbol
+    factory = Factory.new factory_symbol
 
     object = factory.build name: name
 
@@ -39,9 +39,9 @@ describe Factory do
   end
 
   it 'allows specyfing class to use in the factory' do
-    factory = Factory.new :admin, class: klass
+    factory = Factory.new :admin, class: factory_class
 
-    expect(factory.build).to be_a klass
+    expect(factory.build).to be_a factory_class
   end
 
 end

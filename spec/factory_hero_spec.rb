@@ -1,56 +1,56 @@
 require 'spec_helper'
 
 describe FactoryHero do
-  let(:klass) { User }
-  let(:symbol) { :user }
+  let(:factory_class) { User }
+  let(:factory_symbol) { :user }
 
   it 'builds an instance of the factory object' do
-    FactoryHero.define_factory klass
+    FactoryHero.define_factory factory_class
 
-    expect(FactoryHero.build(klass)).to be_an_instance_of klass
+    expect(FactoryHero.build(factory_class)).to be_an_instance_of factory_class
   end
 
-  it 'allows defining a factory using symbol instead of a klass name' do
-    FactoryHero.define_factory symbol
+  it 'allows defining a factory using symbol instead of a class name' do
+    FactoryHero.define_factory factory_symbol
 
-    expect(FactoryHero.build(klass)).to be_an_instance_of klass
+    expect(FactoryHero.build(factory_class)).to be_an_instance_of factory_class
   end
 
   it 'allows defining a factory using symbol and build a factory using symbol' do
-    FactoryHero.define_factory symbol
+    FactoryHero.define_factory factory_symbol
 
-    expect(FactoryHero.build(symbol)).to be_an_instance_of klass
+    expect(FactoryHero.build(factory_symbol)).to be_an_instance_of factory_class
   end
 
   it 'allows assigning custom attributes' do
     attrs = { name: 'foobar' }
-    FactoryHero.define_factory klass
+    FactoryHero.define_factory factory_class
 
-    user = FactoryHero.build klass, attrs
+    user = FactoryHero.build factory_class, attrs
 
     expect(user.name).to eql attrs[:name]
   end
 
   it 'allows assigning default attributes' do
-    FactoryHero.define_factory klass do
+    FactoryHero.define_factory factory_class do
       name 'foobar'
     end
 
-    user = FactoryHero.build klass
+    user = FactoryHero.build factory_class
 
     expect(user.name).to eql 'foobar'
   end
 
   it 'allows defining a class of the used factory as an attribute' do
-    symbol = :admin
-    options = { class: klass }
+    factory_symbol = :admin
+    options = { class: factory_class }
 
-    FactoryHero.define_factory symbol, options do
+    FactoryHero.define_factory factory_symbol, options do
       name 'foobar'
       admin true
     end
 
-    admin = FactoryHero.build symbol
+    admin = FactoryHero.build factory_symbol
 
     expect(admin.name).to eql 'foobar'
     expect(admin.admin).to be_truthy
