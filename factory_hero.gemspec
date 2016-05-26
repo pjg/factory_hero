@@ -6,8 +6,9 @@ require 'factory_hero/version'
 Gem::Specification.new do |spec|
   spec.name          = "factory_hero"
   spec.version       = FactoryHero::VERSION
+  spec.licenses         = ['MIT']
   spec.authors       = ["Paweł Gościcki"]
-  spec.email         = ["pawel.goscicki@gmail.com"]
+  spec.email         = "pawel.goscicki@gmail.com"
 
   spec.summary       = %q{FactoryHero for creating factories}
   spec.description   = %q{FactoryGirl replacement (proof of concept)}
