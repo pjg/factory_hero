@@ -21,4 +21,8 @@ module FactoryHero
     factory.build attrs
   end
 
+  def self.clear!
+    configuration.clear!
+  end
+
 end

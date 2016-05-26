@@ -18,6 +18,10 @@ class Configuration
     end
   end
 
+  def clear!
+    factories.clear
+  end
+
   private
 
   def delete_existing symbol

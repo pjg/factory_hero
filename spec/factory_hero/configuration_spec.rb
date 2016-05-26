@@ -37,4 +37,14 @@ describe Configuration do
       expect(factory).to eql factory
     end
   end
+
+  describe '#clear' do
+    it 'clears all existing factories' do
+      configuration.register_factory factory
+
+      configuration.clear!
+
+      expect(configuration.factories).to be_empty
+    end
+  end
 end

@@ -56,4 +56,14 @@ describe FactoryHero do
     expect(admin.admin).to be_truthy
   end
 
+  it 'allows clearing all defined factories' do
+    FactoryHero.define_factory factory_class do
+      name 'foobar'
+    end
+
+    FactoryHero.clear!
+
+    expect { FactoryHero.build factory_class }.to raise_exception
+  end
+
 end
